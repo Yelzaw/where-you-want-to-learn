@@ -2,10 +2,15 @@
      box-sizing: border-box;
 }
 
+/* google map setting on the page */
 #map {
-     height: 500px;
-     border: 2px solid red;
-}
+     width:400px;
+     height:400px;
+     background:grey;
+     margin: 10px;
+     float: right;
+   }
+
 #history {
      border: 2px solid green;
 }
