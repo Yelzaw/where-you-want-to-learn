@@ -1,0 +1,25 @@
+*{
+     box-sizing: border-box;
+}
+
+#map {
+     height: 500px;
+     border: 2px solid red;
+}
+#history {
+     border: 2px solid green;
+}
+#content {
+     display: flex;
+     border: 3px solid orange;
+}
+#search {
+     border: 2px solid blue;
+}
+#main-container {
+     display: flex;
+     border:4px solid blueviolet;
+}
+#btc-price {
+     border: 2px solid yellowgreen;
+}
