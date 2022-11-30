@@ -2,10 +2,21 @@
      box-sizing: border-box;
 }
 
+/* google map setting on the page */
 #map {
+<<<<<<< HEAD:style.css
      /* height: 500px; */
      border: 2px solid red;
 }
+=======
+     width:400px;
+     height:400px;
+     background:grey;
+     margin: 10px;
+     float: right;
+   }
+
+>>>>>>> 325313f2fffca6892e39de425fb27fc28526c63c:assets/css/style.css
 #history {
      border: 2px solid green;
 }
