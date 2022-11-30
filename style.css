@@ -3,7 +3,7 @@
 }
 
 #map {
-     height: 500px;
+     /* height: 500px; */
      border: 2px solid red;
 }
 #history {
@@ -11,6 +11,7 @@
 }
 #content {
      display: flex;
+     flex-direction: column;
      border: 3px solid orange;
 }
 #search {
@@ -18,8 +19,28 @@
 }
 #main-container {
      display: flex;
+     
      border:4px solid blueviolet;
 }
 #btc-price {
      border: 2px solid yellowgreen;
+}
+#head {
+     display: flex;
+     border: 5px solid pink;
+     
+}
+#calendar-holder {
+     /* position: absolute; */
+     border: 2px solid skyblue
+}
+#head-tittle {
+     display: flex;
+     border: 2px solid darkred
+}
+.card {
+     margin: 3%;
+}
+#head-container {
+     border: 5px solid darkgoldenrod;
 }
