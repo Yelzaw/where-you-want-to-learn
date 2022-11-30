@@ -11,6 +11,7 @@ $(document).ready(function(){
           const input = $('#input')
           const inputValue = input[0].value
           $('#input').val("");
+          $('#country-name').text(inputValue);
           console.log(inputValue) 
 
           //call restcountries.com api
@@ -60,6 +61,9 @@ $(document).ready(function(){
                          console.log(data);
                          var resultLocalUsd = data.result;
                          console.log(resultLocalUsd);
+                         var showResult = document.createElement("p");
+                         showResult.textContent="1 "+currencyName+" = "+resultLocalUsd+" US Dollars";
+                         $('#currency').append(showResult);
                     })
                }
           })          
