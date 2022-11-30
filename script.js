@@ -54,13 +54,27 @@ $(document).ready(function(){
           };
 
           fetch("https://api.apilayer.com/exchangerates_data/convert?to="+"usd"+"&from="+currencyCode+"&amount=1", requestOptions)
-          .then(response => response.text())
-          .then(result => console.log(result))
+          .then(function(response){
+               if(response.ok){
+                    response.json().then(function(data){
+                         console.log(data);
+                         var resultLocalUsd = data.result;
+                         console.log(resultLocalUsd);
+                    })
+               }
+          })          
           .catch(error => console.log('error', error));
 
           fetch("https://api.apilayer.com/exchangerates_data/convert?to="+currencyCode+"&from="+"usd"+"&amount=1", requestOptions)
-          .then(response => response.text())
-          .then(result => console.log(result))
+          .then(function(response){
+               if(response.ok){
+                    response.json().then(function(data){
+                         console.log(data);
+                         var resultUsdLocal = data.result;
+                         console.log(resultUsdLocal);
+                    })
+               }
+          })  
           .catch(error => console.log('error', error));
           }
 
