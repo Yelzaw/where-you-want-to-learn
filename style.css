@@ -38,8 +38,10 @@
      display: flex;
      border: 2px solid darkred
 }
+
 .card {
      margin: 3%;
+     padding: 10px;
 }
 #head-container {
      border: 5px solid darkgoldenrod;
