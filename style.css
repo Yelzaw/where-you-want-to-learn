@@ -49,6 +49,12 @@
      margin: 1%;
      padding: 10px;
 }
+
+#currency,
+#weather {
+     border-color:white;
+}
+
 #head-container {
      border: 5px solid darkgoldenrod;
 }

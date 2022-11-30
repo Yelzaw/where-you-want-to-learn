@@ -27,7 +27,7 @@ $(document).ready(function(){
      //to get country data, currency code and currency name
           $("#today-rate").siblings("h6").text("Today Exchange Rate");
           var exchangeInfo = document.querySelector('#today-rate');
-          exchangeInfo.innerHTML="";
+          exchangeInfo.innerHTML=""; //to make sure there is no data from previous search
 
           var currencyCode = "";
           var currencyName = "";
@@ -52,6 +52,7 @@ $(document).ready(function(){
                                    // console.log(currencyCode);
                                    currencyName = (Object.values(data[0].currencies))[0].name;
                                    // console.log(currencyName);
+                                   $('#currency').attr('style','border-color:grey')
                                    currency()
                               })
                          } else {
@@ -64,7 +65,7 @@ $(document).ready(function(){
                
           //Currency exchange rate with USD
           function currency(){          
-
+              
                var myHeaders = new Headers();
                myHeaders.append("apikey", "eEuvQv8ee37GzlxcoBm83o8xeRzhO4b4");
 
@@ -96,6 +97,7 @@ $(document).ready(function(){
                               var showResult = document.createElement("p");
                               showResult.textContent="1 "+compareName+" = "+resultUsdLocal+" "+currencyName;
                               exchangeInfo.appendChild(showResult);
+                              
                          })
                     }
                     })  
