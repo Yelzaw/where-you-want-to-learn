@@ -11,9 +11,7 @@ $(document).ready(function(){
           const input = $('#input')
           const inputValue = input[0].value
           console.log(inputValue) 
-          function map(){
-
-          }
+          
           function wikki(){
 
           }
@@ -24,7 +22,6 @@ $(document).ready(function(){
      $('#content')
      $('#city name')
      $('#history')
-     $('#map')
      $('#currency')
 
 })
