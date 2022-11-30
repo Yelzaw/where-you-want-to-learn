@@ -24,7 +24,7 @@ $(document).ready(function(){
      // CURRENCY EXCHANGE RATE
      function currecncyExchangeRate(input){
      //call restcountries.com api
-          //get country data to get currency code and currency name
+     //to get country data, currency code and currency name
           $("#today-rate").siblings("h6").text("Today Exchange Rate");
           var exchangeInfo = document.querySelector('#today-rate');
           exchangeInfo.innerHTML="";
@@ -33,6 +33,7 @@ $(document).ready(function(){
           var currencyName = "";
           var compareCurrency = "CAD";
           var compareName = "Canadian dollar";
+          var capitalName = ""; // Capital name of country to link weather
 
           if (input=="canada"){
                compareCurrency = "USD";
@@ -44,7 +45,9 @@ $(document).ready(function(){
                     .then(function(response){
                          if(response.ok){
                               response.json().then(function(data){
-                                   // console.log(data);//JSON data to show in console
+                                   console.log(data);//JSON data to show in console
+                                   capitalName = data[0].capital[0]; // Result of Capital Name
+                                   console.log(capitalName);
                                    currencyCode = (Object.keys(data[0].currencies))[0];
                                    // console.log(currencyCode);
                                    currencyName = (Object.values(data[0].currencies))[0].name;
