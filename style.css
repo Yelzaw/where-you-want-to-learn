@@ -20,9 +20,12 @@
 .current-search {
      padding: 10px;
 }
+#input {
+     width:100%;
+}
 #main-container {
      display: flex;
-     
+     padding: 20px;
      border:4px solid blueviolet;
 }
 #btc-price {
