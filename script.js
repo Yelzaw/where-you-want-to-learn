@@ -10,8 +10,7 @@ $(document).ready(function(){
           console.log('yeah!!')   
           const input = $('#input')
           const inputValue = input[0].value
-          $('#input').val("");//clean input space
-          $('#country-name').text(inputValue);//Changed country name according to input
+          $('#input').val("");//clean input space         
           console.log(inputValue);
           currecncyExchangeRate(inputValue);
           wikipediaBlurb(inputValue);
@@ -122,6 +121,7 @@ $(document).ready(function(){
                               var page = data.query.pages;
                               var pageId = Object.keys(page)[0];
                               var blurb = page[pageId].extract;
+                              $('#country-name').text(page[pageId].title);//Format country name to formal
                               console.log(blurb);
                               var showResult = document.createElement("p");
                               showResult.textContent=blurb;
