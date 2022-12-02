@@ -21,8 +21,12 @@ $(document).ready(function(){
      $('#currency')
 
      //Calendar
-     var reformatDate = dayjs().format('dddd, MMMM D YYYY, h:mm:ss a');
-     $('#calendar-holder').text(reformatDate)
+     function displayTime(){
+          var reformatDate = dayjs().format('dddd, MMMM D YYYY, h:mm:ss a');
+          $('#calendar-holder').text(reformatDate);
+          setTimeout(displayTime,1000);
+     }
+     displayTime()
      //calendar end
 
      // CURRENCY EXCHANGE RATE
