@@ -19,7 +19,6 @@ $(document).ready(function(){
      $('#country-name')
      $('#history')
 
-     $('#currency')
 
      // CURRENCY EXCHANGE RATE
      function currecncyExchangeRate(input){

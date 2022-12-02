@@ -23,6 +23,9 @@
 #input {
      width:100%;
 }
+#submit-btn {
+    margin-top: 5px;
+}
 #main-container {
      display: flex;
      padding: 20px;
@@ -50,8 +53,9 @@
      padding: 10px;
 }
 
-#currency,
-#weather {
+/* #weather, */
+#currency
+ {
      border-color:white;
 }
 
