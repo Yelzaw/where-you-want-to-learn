@@ -12,8 +12,7 @@ $(document).ready(function(){
           const inputValue = input[0].value;
           $('#input').val("");//clean input space         
           console.log(inputValue);
-          currecncyExchangeRate(inputValue);
-          wikipediaBlurb(inputValue);
+          callCountryData(inputValue);          
      })
      $('#content')
      $('#country-name')
@@ -29,11 +28,12 @@ $(document).ready(function(){
      displayTime()
      //calendar end
 
-     // CURRENCY EXCHANGE RATE
-     function currecncyExchangeRate(input){
+     // COUNTRY DATA 
+     
+     function callCountryData(input){
      //call restcountries.com api
-     //to get country data, currency code and currency name
-          $("#today-rate").siblings("h6").text("Today Exchange Rate");
+     //to get country data, currency code,currency name and counter check input with country name
+          
           var exchangeInfo = document.querySelector('#today-rate');
           exchangeInfo.innerHTML=""; //to make sure there is no data from previous search
 
@@ -41,7 +41,7 @@ $(document).ready(function(){
           var currencyName = "";
           var compareCurrency = "CAD";
           var compareName = "Canadian dollar";
-          var capitalName = ""; // Capital name of country to link weather
+          var capitalName = ""; // the name of Capital of country to link weather
 
           if (input=="canada"){
                compareCurrency = "USD";
@@ -54,25 +54,28 @@ $(document).ready(function(){
                          if(response.ok){
                               response.json().then(function(data){
                                    console.log(data);//JSON data to show in console
-                                   capitalName = data[0].capital[0]; // Result of Capital Name
+                                   capitalName = data[0].capital[0]; // Result of Capital Name <----result to link weather
                                    console.log(capitalName);
                                    currencyCode = (Object.keys(data[0].currencies))[0];
                                    // console.log(currencyCode);
                                    currencyName = (Object.values(data[0].currencies))[0].name;
                                    // console.log(currencyName);
-                                   $('#currency').attr('style','border-color:grey')
-                                   currency()
+                                   $('#currency').attr('style','border-color:grey');                                   
+                                   $("#today-rate").siblings("h6").text("Today Exchange Rate");                                   
+                                   $('#country-name').attr("style","padding:15px");
+                                   currencyExchange();
+                                   wikipediaBlurb(input);// <-----link to wikipedia function
+                                   // <----- can place weather function link here
                               })
                          } else {
-                              $('#country-name').text("Please try again");
+                              $('#country-name').attr("style","font-size:20px");
+                              $('#country-name').text("Please enter correct country name. Thanks.");
                               }      
                     })
-                    .catch(function (error) {
-                         $('#country-name').val("Please try again");
-                    })
+                    .catch(error => console.log('error', error)); 
                
-          //Currency exchange rate with USD
-          function currency(){          
+     // CURRENCY EXCHANGE RATE
+          function currencyExchange(){          
               
                var myHeaders = new Headers();
                myHeaders.append("apikey", "eEuvQv8ee37GzlxcoBm83o8xeRzhO4b4");

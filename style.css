@@ -54,7 +54,8 @@
 }
 
 /* #weather, */
-#currency
+#currency,
+#history
  {
      border-color:white;
 }
