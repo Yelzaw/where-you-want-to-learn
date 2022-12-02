@@ -14,11 +14,12 @@ $(document).ready(function(){
           $('#country-name').text(inputValue);//Changed country name according to input
           console.log(inputValue);
           currecncyExchangeRate(inputValue);
+          wikipediaBlurb(inputValue);
      })
      $('#content')
      $('#country-name')
      $('#history')
-
+     $('#currency')
 
      // CURRENCY EXCHANGE RATE
      function currecncyExchangeRate(input){
@@ -105,4 +106,30 @@ $(document).ready(function(){
                .catch(error => console.log('error', error));               
           }
      }
+     // END OF CURRENCY EXCHANGE RATE
+
+     // Wikipedia blurbs
+     function wikipediaBlurb(input){
+          var wikiUrl = "https://en.wikipedia.org/w/api.php?action=query&format=json&origin=*&prop=extracts&exintro&explaintext&exsentences=5&titles="+input;
+          var wikiInfo = document.querySelector('#history');
+          wikiInfo.innerHTML=""; //to make sure there is no data from previous search
+
+          fetch(wikiUrl)
+               .then(function(response){
+                    if(response.ok){
+                         response.json().then(function(data){
+                              console.log(data);//JSON data to show in console
+                              var page = data.query.pages;
+                              var pageId = Object.keys(page)[0];
+                              var blurb = page[pageId].extract;
+                              console.log(blurb);
+                              var showResult = document.createElement("p");
+                              showResult.textContent=blurb;
+                              wikiInfo.appendChild(showResult);
+                         })
+                    }
+               })
+               .catch(error => console.log('error', error));
+     }
+     // END OF Wikipedia blurbs
 })
