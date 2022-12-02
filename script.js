@@ -8,8 +8,8 @@ $(document).ready(function(){
      $('#search')
      $('#submit-btn').on('click', function(){
           console.log('yeah!!')   
-          const input = $('#input')
-          const inputValue = input[0].value
+          const input = $('#input');
+          const inputValue = input[0].value;
           $('#input').val("");//clean input space         
           console.log(inputValue);
           currecncyExchangeRate(inputValue);
