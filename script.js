@@ -1,16 +1,22 @@
 $(document).ready(function(){
      console.log('connected');
-     var latitude = 45.42;
-     var longtitude = -75.7;
-     initMap();
+     // Save search setup
+     //localStorage.clear();
+     //let searchHistory = localStorage.getItem('searchHistory') ? JSON.parse(localStorage.getItem('searchHistory')) : [];
      $('#submit-btn').on('click', function(){
           console.log('yeah!!')   
           const input = $('#input');
           const inputValue = input[0].value;
           $('#input').val("");//clean input space         
-          console.log(inputValue);
-          callCountryData(inputValue);          
+          //console.log(inputValue);
+          callCountryData(inputValue);  
+          // Save previous search
+          //searchHistory.push(inputValue);
+          //localStorage.setItem('searchHistory', JSON.stringify(searchHistory));
+          //console.log(searchHistory);
+          // still need to display previous search, allow user to click
      })
+
      
      //Calendar
      function displayTime(){
@@ -73,7 +79,7 @@ $(document).ready(function(){
      function currencyExchange(){          
           
           var myHeaders = new Headers();
-          myHeaders.append("apikey", "eEuvQv8ee37GzlxcoBm83o8xeRzhO4b4");
+          myHeaders.append("apikey", "RLLZMhNlBtFGhOYYLnKAl3NDZNk45pep");
           var requestOptions = {
                method: 'GET',
                redirect: 'follow',
@@ -148,4 +154,5 @@ $(document).ready(function(){
        });
      }
      // END OF MAP
+     window.onload = callCountryData("canada"); // <---- default country to load, keep commented unless testing or deploying to avoid API call limit
 })

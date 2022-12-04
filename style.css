@@ -1,3 +1,4 @@
+/* We need to use a css library other than bootstrap, I suggest we find something just for fonts since she's already done */
 *{
      box-sizing: border-box;
 }
@@ -13,9 +14,11 @@
      display: flex;
      flex-direction: column;
      border: 3px solid orange;
+     background-color: rgb(231, 178, 178);
 }
 #search {
-     border: 2px solid blue;
+     background-color: lightblue;
+     flex-direction: column;
 }
 .current-search {
      padding: 10px;
@@ -28,24 +31,23 @@
 }
 #main-container {
      display: flex;
-     padding: 20px;
-     border:4px solid blueviolet;
 }
 #btc-price {
      border: 2px solid yellowgreen;
 }
 #head {
      display: flex;
-     border: 5px solid pink;
-     
+     background-color: aliceblue;
+     width: 100%;
 }
 #calendar-holder {
-     /* position: absolute; */
-     border: 2px solid skyblue
-}
-#head-tittle {
      display: flex;
-     border: 2px solid darkred
+     width: auto;
+     justify-content: flex-end;
+}
+#head-title {
+     display: flex;
+     padding: 10px;
 }
 
 .card {
@@ -61,5 +63,12 @@
 }
 
 #head-container {
-     border: 5px solid darkgoldenrod;
+     width: 100%;
 }
+
+/* When screen is too small, content shuffles under search */
+@media screen and (max-width: 800px) {
+     #content, #search {
+       width: 100%;
+     }
+   }
