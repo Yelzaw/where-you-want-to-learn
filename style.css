@@ -3,8 +3,8 @@
 }
 
 #map {
-     /* height: 500px; */
-     border: 2px solid red;
+     height: 400px;
+     border: 2px solid lightgrey;
 }
 #history {
      border: 2px solid green;
