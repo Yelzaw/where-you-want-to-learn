@@ -62,7 +62,8 @@ $(document).ready(function(){
                                    $("#today-rate").siblings("h6").text("Today Exchange Rate");                                   
                                    $('#country-name').attr("style","padding:15px");
 
-                                   currencyExchange();
+                                   // currencyExchange();
+                                   exchangeRate();
                                    wikipediaBlurb(input);// <-----link to wikipedia function
                                    // <----- can place weather function link here
                                    initMap();
@@ -76,46 +77,71 @@ $(document).ready(function(){
      }    
 
      // CURRENCY EXCHANGE RATE
-     function currencyExchange(){          
+     // new exchange link
+     function exchangeRate(){
+          var key = "9d764e23d7588b589becfa68e6021ab75a789334";
+
+          const url1 =  "https://api.getgeoapi.com/v2/currency/convert?api_key="+key+"&from="+compareCurrency+"&to="+currencyCode+"&amount=1&format=json"
+
+          $.getJSON(url1, function (data) {
+               console.log(data);
+               var resultLocalUsd = (Object.values(data.rates))[0].rate;
+               var showResult = document.createElement("p");
+               showResult.textContent="1 "+currencyName+" = "+resultLocalUsd+" "+compareName;
+               exchangeInfo.appendChild(showResult);
+
+               const url2 =  "https://api.getgeoapi.com/v2/currency/convert?api_key="+key+"&from="+currencyCode+"&to="+compareCurrency+"&amount=1&format=json"
+
+               $.getJSON(url2, function (data) {
+                    console.log(data);
+                    var resultLocalUsd = (Object.values(data.rates))[0].rate;
+                    var showResult = document.createElement("p");
+                    showResult.textContent="1 "+compareName+" = "+resultLocalUsd+" "+currencyName;
+                    exchangeInfo.appendChild(showResult);
+               });
+           });
+     }
+     // old exchange link
+     // function currencyExchange(){          
           
-          var myHeaders = new Headers();
-          myHeaders.append("apikey", "RLLZMhNlBtFGhOYYLnKAl3NDZNk45pep");
-          var requestOptions = {
-               method: 'GET',
-               redirect: 'follow',
-               headers: myHeaders
-               };
-               //Another API to get exchange information
-          fetch("https://api.apilayer.com/exchangerates_data/convert?to="+compareCurrency+"&from="+currencyCode+"&amount=1", requestOptions) 
-          .then(function(response){
-               if(response.ok){
-                    response.json().then(function(data){
-                         // console.log(data);
-                         var resultLocalUsd = data.result;
-                         // console.log(resultLocalUsd);
-                         var showResult = document.createElement("p");
-                         showResult.textContent="1 "+currencyName+" = "+resultLocalUsd+" "+compareName;
-                         exchangeInfo.appendChild(showResult);
-                    })
-               }
-               fetch("https://api.apilayer.com/exchangerates_data/convert?to="+currencyCode+"&from="+compareCurrency+"&amount=1", requestOptions)
-               .then(function(response){
-               if(response.ok){
-                    response.json().then(function(data){
-                         // console.log(data);
-                         var resultUsdLocal = data.result;
-                         // console.log(resultUsdLocal);
-                         var showResult = document.createElement("p");
-                         showResult.textContent="1 "+compareName+" = "+resultUsdLocal+" "+currencyName;
-                         exchangeInfo.appendChild(showResult);
+     //      var myHeaders = new Headers();
+     //      myHeaders.append("apikey", "RLLZMhNlBtFGhOYYLnKAl3NDZNk45pep");
+     //      var requestOptions = {
+     //           method: 'GET',
+     //           redirect: 'follow',
+     //           headers: myHeaders
+     //           };
+     //           //Another API to get exchange information
+     //      fetch("https://api.apilayer.com/exchangerates_data/convert?to="+compareCurrency+"&from="+currencyCode+"&amount=1", requestOptions) 
+     //      .then(function(response){
+     //           if(response.ok){
+     //                response.json().then(function(data){
+     //                     // console.log(data);
+     //                     var resultLocalUsd = data.result;
+     //                     // console.log(resultLocalUsd);
+     //                     var showResult = document.createElement("p");
+     //                     showResult.textContent="1 "+currencyName+" = "+resultLocalUsd+" "+compareName;
+     //                     exchangeInfo.appendChild(showResult);
+     //                })
+     //           }
+     //           fetch("https://api.apilayer.com/exchangerates_data/convert?to="+currencyCode+"&from="+compareCurrency+"&amount=1", requestOptions)
+     //           .then(function(response){
+     //           if(response.ok){
+     //                response.json().then(function(data){
+     //                     // console.log(data);
+     //                     var resultUsdLocal = data.result;
+     //                     // console.log(resultUsdLocal);
+     //                     var showResult = document.createElement("p");
+     //                     showResult.textContent="1 "+compareName+" = "+resultUsdLocal+" "+currencyName;
+     //                     exchangeInfo.appendChild(showResult);
                          
-                    })
-               }
-               })  
-               .catch(error => console.log('error', error));
-          })          
-          .catch(error => console.log('error', error));               
-     }     
+     //                })
+     //           }
+     //           })  
+     //           .catch(error => console.log('error', error));
+     //      })          
+     //      .catch(error => console.log('error', error));               
+     // }     
      // END OF CURRENCY EXCHANGE RATE
 
      // Wikipedia blurbs
