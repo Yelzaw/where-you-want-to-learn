@@ -1,11 +1,8 @@
 $(document).ready(function(){
-     console.log('connected')
-     $('#head')
-     $('#head-container')
-     $('#calendar-holder')
-     $('#head-tittle')
-     $('#main-container')
-     $('#search')
+     console.log('connected');
+     var latitude = 45.42;
+     var longtitude = -75.7;
+     initMap();
      $('#submit-btn').on('click', function(){
           console.log('yeah!!')   
           const input = $('#input');
@@ -14,14 +11,10 @@ $(document).ready(function(){
           console.log(inputValue);
           callCountryData(inputValue);          
      })
-     $('#content')
-     $('#country-name')
-     $('#history')
-     $('#currency')
-
+     
      //Calendar
      function displayTime(){
-          var reformatDate = dayjs().format('dddd, MMMM D YYYY, h:mm:ss a');
+          var reformatDate = dayjs().format('dddd, MMMM D, YYYY, h:mm:ss a');
           $('#calendar-holder').text(reformatDate);
           setTimeout(displayTime,1000);
      }
@@ -30,19 +23,18 @@ $(document).ready(function(){
 
      // COUNTRY DATA 
      
+     var currencyCode = "";
+     var currencyName = "";
+     var compareCurrency = "CAD";
+     var compareName = "Canadian dollar";
+     var capitalName = ""; // the name of Capital of country to link weather
+     var exchangeInfo = document.querySelector('#today-rate');
+     
      function callCountryData(input){
      //call restcountries.com api
-     //to get country data, currency code,currency name and counter check input with country name
+     //to get country data, currency code,currency name and counter check input with country name          
           
-          var exchangeInfo = document.querySelector('#today-rate');
           exchangeInfo.innerHTML=""; //to make sure there is no data from previous search
-
-          var currencyCode = "";
-          var currencyName = "";
-          var compareCurrency = "CAD";
-          var compareName = "Canadian dollar";
-          var capitalName = ""; // the name of Capital of country to link weather
-
           if (input=="canada"){
                compareCurrency = "USD";
                compareName = "United State dollar";
@@ -55,17 +47,19 @@ $(document).ready(function(){
                               response.json().then(function(data){
                                    console.log(data);//JSON data to show in console
                                    capitalName = data[0].capital[0]; // Result of Capital Name <----result to link weather
-                                   console.log(capitalName);
+                                   $('#capital-name').text("Capital City: "+capitalName);
+                                   latitude = data[0].capitalInfo.latlng[0];                                   
+                                   longtitude = data[0].capitalInfo.latlng[1];                  
                                    currencyCode = (Object.keys(data[0].currencies))[0];
-                                   // console.log(currencyCode);
                                    currencyName = (Object.values(data[0].currencies))[0].name;
-                                   // console.log(currencyName);
                                    $('#currency').attr('style','border-color:grey');                                   
                                    $("#today-rate").siblings("h6").text("Today Exchange Rate");                                   
                                    $('#country-name').attr("style","padding:15px");
+
                                    currencyExchange();
                                    wikipediaBlurb(input);// <-----link to wikipedia function
                                    // <----- can place weather function link here
+                                   initMap();
                               })
                          } else {
                               $('#country-name').attr("style","font-size:20px");
@@ -73,50 +67,49 @@ $(document).ready(function(){
                               }      
                     })
                     .catch(error => console.log('error', error)); 
-               
-     // CURRENCY EXCHANGE RATE
-          function currencyExchange(){          
-              
-               var myHeaders = new Headers();
-               myHeaders.append("apikey", "eEuvQv8ee37GzlxcoBm83o8xeRzhO4b4");
+     }    
 
-               var requestOptions = {
-                    method: 'GET',
-                    redirect: 'follow',
-                    headers: myHeaders
-                    };
-                    //Another API to get exchange information
-               fetch("https://api.apilayer.com/exchangerates_data/convert?to="+compareCurrency+"&from="+currencyCode+"&amount=1", requestOptions) 
+     // CURRENCY EXCHANGE RATE
+     function currencyExchange(){          
+          
+          var myHeaders = new Headers();
+          myHeaders.append("apikey", "eEuvQv8ee37GzlxcoBm83o8xeRzhO4b4");
+          var requestOptions = {
+               method: 'GET',
+               redirect: 'follow',
+               headers: myHeaders
+               };
+               //Another API to get exchange information
+          fetch("https://api.apilayer.com/exchangerates_data/convert?to="+compareCurrency+"&from="+currencyCode+"&amount=1", requestOptions) 
+          .then(function(response){
+               if(response.ok){
+                    response.json().then(function(data){
+                         // console.log(data);
+                         var resultLocalUsd = data.result;
+                         // console.log(resultLocalUsd);
+                         var showResult = document.createElement("p");
+                         showResult.textContent="1 "+currencyName+" = "+resultLocalUsd+" "+compareName;
+                         exchangeInfo.appendChild(showResult);
+                    })
+               }
+               fetch("https://api.apilayer.com/exchangerates_data/convert?to="+currencyCode+"&from="+compareCurrency+"&amount=1", requestOptions)
                .then(function(response){
-                    if(response.ok){
-                         response.json().then(function(data){
-                              // console.log(data);
-                              var resultLocalUsd = data.result;
-                              // console.log(resultLocalUsd);
-                              var showResult = document.createElement("p");
-                              showResult.textContent="1 "+currencyName+" = "+resultLocalUsd+" "+compareName;
-                              exchangeInfo.appendChild(showResult);
-                         })
-                    }
-                    fetch("https://api.apilayer.com/exchangerates_data/convert?to="+currencyCode+"&from="+compareCurrency+"&amount=1", requestOptions)
-                    .then(function(response){
-                    if(response.ok){
-                         response.json().then(function(data){
-                              // console.log(data);
-                              var resultUsdLocal = data.result;
-                              // console.log(resultUsdLocal);
-                              var showResult = document.createElement("p");
-                              showResult.textContent="1 "+compareName+" = "+resultUsdLocal+" "+currencyName;
-                              exchangeInfo.appendChild(showResult);
-                              
-                         })
-                    }
-                    })  
-                    .catch(error => console.log('error', error));
-               })          
-               .catch(error => console.log('error', error));               
-          }
-     }
+               if(response.ok){
+                    response.json().then(function(data){
+                         // console.log(data);
+                         var resultUsdLocal = data.result;
+                         // console.log(resultUsdLocal);
+                         var showResult = document.createElement("p");
+                         showResult.textContent="1 "+compareName+" = "+resultUsdLocal+" "+currencyName;
+                         exchangeInfo.appendChild(showResult);
+                         
+                    })
+               }
+               })  
+               .catch(error => console.log('error', error));
+          })          
+          .catch(error => console.log('error', error));               
+     }     
      // END OF CURRENCY EXCHANGE RATE
 
      // Wikipedia blurbs
@@ -144,4 +137,15 @@ $(document).ready(function(){
                .catch(error => console.log('error', error));
      }
      // END OF Wikipedia blurbs
+     
+        
+     // MAP OF CAPITAL CITY
+     var map;
+     function initMap() {
+     map = new google.maps.Map(document.getElementById('map'), {
+         center: {lat:latitude, lng:longtitude},
+         zoom: 6
+       });
+     }
+     // END OF MAP
 })
