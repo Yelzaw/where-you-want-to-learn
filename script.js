@@ -1,14 +1,18 @@
 $(document).ready(function(){
      const searches = JSON.parse(window.localStorage.getItem("search")) || [];
-     const input = $('#input');
-     const inputValue = input[0].value;
+     // const input = $('#input');
+     // const inputValue = input[0].value;
      console.log(searches)
           for (let i =0; i<searches.length; i++){
                const newPreviosSearch = `<button id="eachPreviousSearch${i}" class="eachPreviousSearch">${searches[i]}</button>`
                $('#previos-search').prepend(newPreviosSearch);
                $(`#eachPreviousSearch${i}`).on('click', function(){
                     inputValue = searches[i]
-                    // currentSearch(inputValue)
+                    callCountryData(inputValue)
+                    var newSearch = inputValue;
+                    searches.push(newSearch);
+                    window.localStorage.setItem("search", JSON.stringify(searches));
+                    
                })
           } 
      console.log('connected');
@@ -29,7 +33,7 @@ $(document).ready(function(){
      
      //Calendar
      function displayTime(){
-          var reformatDate = dayjs().format('dddd, MMMM D, YYYY, h:mm:ss a');
+          var reformatDate = dayjs().format('dddd, MMMM D');
           $('#calendar-holder').text(reformatDate);
           setTimeout(displayTime,1000);
      }
