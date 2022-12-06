@@ -147,6 +147,10 @@ $(document).ready(function(){
                               var showResult = document.createElement("p");
                               showResult.textContent=blurb;
                               wikiInfo.appendChild(showResult);
+                              var wikiLink = document.createElement("a");
+                              wikiLink.setAttribute("href", "https://en.wikipedia.org/?curid="+pageId);
+                              wikiLink.textContent="Read more on Wikipedia";
+                              wikiInfo.appendChild(wikiLink);
                          })
                     }
                })
