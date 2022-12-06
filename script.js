@@ -1,20 +1,24 @@
 $(document).ready(function(){
      const searches = JSON.parse(window.localStorage.getItem("search")) || [];
-     // const input = $('#input');
-     // const inputValue = input[0].value;
+
      console.log(searches)
+     function historyListUpdate() {
           for (let i =0; i<searches.length; i++){
                const newPreviosSearch = `<button id="eachPreviousSearch${i}" class="eachPreviousSearch">${searches[i]}</button>`
                $('#previos-search').prepend(newPreviosSearch);
-               $(`#eachPreviousSearch${i}`).on('click', function(){
+               $(`#eachPreviousSearch${i}`).on('click', function() {
+                    $('#previos-search').prepend(newPreviosSearch);
                     inputValue = searches[i]
                     callCountryData(inputValue)
                     var newSearch = inputValue;
                     searches.push(newSearch);
                     window.localStorage.setItem("search", JSON.stringify(searches));
-                    
-               })
+               }) 
           } 
+     }
+     historyListUpdate();
+     
+          
      console.log('connected');
      var latitude = 45.42;
      var longtitude = -75.7;
@@ -28,6 +32,7 @@ $(document).ready(function(){
           searches.push(newSearch);
           window.localStorage.setItem("search", JSON.stringify(searches));
           console.log(inputValue);
+          historyListUpdate()
           $('#input').val("");//clean input space 
      })
      
