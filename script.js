@@ -4,7 +4,7 @@ $(document).ready(function(){
      console.log(searches)
      function historyListUpdate() {
           for (let i =0; i<searches.length; i++){
-               
+               searches.length > 5? searches.shift() : searches;// if there are more than 5 searches, remove the oldest one
                const newPreviosSearch = `<button id="eachPreviousSearch${i}" class="eachPreviousSearch">${searches[i]}</button>`
                $('#previos-search').prepend(newPreviosSearch);
                $(`#eachPreviousSearch${i}`).on('click', function() {
