@@ -63,9 +63,8 @@ body {
      /* border: 5px solid pink; */
 }
 #calendar-holder {
-     position: absolute; 
-     top: 60px;
-     left: 2%;
+     display: flex;
+     flex-direction: flex-end;
      border: 5px solid rgba(109, 199, 194, 0.904);
      background-color: rgba(154, 247, 242, 0.904);
      border-radius: 15px;
