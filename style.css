@@ -120,3 +120,10 @@ footer {
      margin: 1%;
      padding: 2%;
 }
+
+/* When screen is too small, content shuffles under search */
+@media screen and (max-width: 800px) {
+     #content, #search {
+       width: 100%;
+     }
+   }
