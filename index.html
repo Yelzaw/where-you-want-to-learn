@@ -18,18 +18,18 @@
 <body>
      <header id="head" class="head-container">
           <div class="row" id="head-container">
-               <div id="calendar-holder" class="col-1">Current date</div>
-               <h1 id="head-tittle" class="col-11 d-flex justify-content-center">Where in the world would you want to learn about?</h1>   
+               <!-- <div id="calendar-holder" class="col-1">Current date</div> -->
+               <h1 id="head-tittle" class="head-tittle">Where in the world would you want to learn about?</h1>   
           </div>
      </header>
 
-     <main id="main-container" class="row">
+     <main id="main-container" class="main-container">
           <!-- Search tab -->
-          <div id="search" class="col-4">
-
+          <div id="search" class="search-container">
+               <div id="calendar-holder" class="calendar-holder">Current date</div>
                <div class="current-search">Search for a Country: 
                     <input id="input" type="text">
-                    <button id="submit-btn" type="button" class="btn btn-primary">Search</button>     
+                    <button id="submit-btn" type="button" class="btn">Search</button>     
                </div>
                <!-- THIS NEEDS TO BE DONE TO COMPLETE PROJECT CRITERIA -->
                <div id="previos-search" class="previos-search">
@@ -37,7 +37,7 @@
                </div>
           </div>
           <!-- Main content boxes -->
-          <article id="content" class="col-8">
+          <article id="content" class="content">
                <h2 id="country-name"></h2>
                <div id="history" class="card"></div>               
                <div id="currency" class="card">            
