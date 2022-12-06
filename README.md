@@ -25,6 +25,7 @@ Weather <br>
 * Currency data: api.getgeoapi.com <br>
 * Country data: restcountries.com <br>
 * Wikipedia: api.wikipedia.org <br>
+* Google Maps: maps.google.com/api
 
 ### Contributers
 [Yelzaw](https://github.com/Yelzaw) <br>
