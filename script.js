@@ -90,45 +90,29 @@ $(document).ready(function(){
 
      // CURRENCY EXCHANGE RATE
      function currencyExchange(){          
-          
-          var myHeaders = new Headers();
-          myHeaders.append("apikey", "eEuvQv8ee37GzlxcoBm83o8xeRzhO4b4");
-          var requestOptions = {
-               method: 'GET',
-               redirect: 'follow',
-               headers: myHeaders
-               };
-               //Another API to get exchange information
-          fetch("https://api.apilayer.com/exchangerates_data/convert?to="+compareCurrency+"&from="+currencyCode+"&amount=1", requestOptions) 
-          .then(function(response){
-               if(response.ok){
-                    response.json().then(function(data){
-                         // console.log(data);
-                         var resultLocalUsd = data.result;
-                         // console.log(resultLocalUsd);
-                         var showResult = document.createElement("p");
-                         showResult.textContent="1 "+currencyName+" = "+resultLocalUsd+" "+compareName;
-                         exchangeInfo.appendChild(showResult);
-                    })
-               }
-               fetch("https://api.apilayer.com/exchangerates_data/convert?to="+currencyCode+"&from="+compareCurrency+"&amount=1", requestOptions)
-               .then(function(response){
-               if(response.ok){
-                    response.json().then(function(data){
-                         // console.log(data);
-                         var resultUsdLocal = data.result;
-                         // console.log(resultUsdLocal);
-                         var showResult = document.createElement("p");
-                         showResult.textContent="1 "+compareName+" = "+resultUsdLocal+" "+currencyName;
-                         exchangeInfo.appendChild(showResult);
-                         
-                    })
-               }
-               })  
-               .catch(error => console.log('error', error));
-          })          
-          .catch(error => console.log('error', error));               
-     }     
+     // new exchange link   
+          var key = "9d764e23d7588b589becfa68e6021ab75a789334";
+
+          const url1 =  "https://api.getgeoapi.com/v2/currency/convert?api_key="+key+"&from="+compareCurrency+"&to="+currencyCode+"&amount=1&format=json"
+
+          $.getJSON(url1, function (data) {
+               console.log(data);
+               var resultLocalUsd = (Object.values(data.rates))[0].rate;
+               var showResult = document.createElement("p");
+               showResult.textContent="1 "+currencyName+" = "+resultLocalUsd+" "+compareName;
+               exchangeInfo.appendChild(showResult);
+
+               const url2 =  "https://api.getgeoapi.com/v2/currency/convert?api_key="+key+"&from="+currencyCode+"&to="+compareCurrency+"&amount=1&format=json"
+
+               $.getJSON(url2, function (data) {
+                    console.log(data);
+                    var resultLocalUsd = (Object.values(data.rates))[0].rate;
+                    var showResult = document.createElement("p");
+                    showResult.textContent="1 "+compareName+" = "+resultLocalUsd+" "+currencyName;
+                    exchangeInfo.appendChild(showResult);
+               });
+          });
+     }
      // END OF CURRENCY EXCHANGE RATE
 
      // Wikipedia blurbs
@@ -166,4 +150,5 @@ $(document).ready(function(){
           });
      }
      // END OF MAP
+     window.onload = callCountryData("canada"); // <---- default country to load, keep commented unless testing or deploying to avoid API call limit
 })
