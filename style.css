@@ -6,7 +6,7 @@ body {
      margin-left: 10%;
      display: flex;
      flex-direction: column;
-     background-color: rgb(180, 175, 247) !important;
+     background-color: rgb(180, 175, 247);
 }
 #map {
      height: 200px;
@@ -32,12 +32,13 @@ body {
 #content {
      display: flex;
      flex-direction: column;
+     width: 70%;
      margin-right: 3%;
      margin-left: 1%;
      /* border: 3px solid orange;  */
 }
 #search {
-     /* width: 200px;*/
+     width: 200px;
      display: flex;
      flex-direction: column;
      /* justify-content: center; */
@@ -58,8 +59,9 @@ body {
      border-radius: 7px;
 }
 #main-container {
-     width: fit-content;
+     width: auto;
      display: flex;
+     flex-wrap: wrap;
      /* border:4px solid blueviolet;  */
 }
 #head {
@@ -133,7 +135,7 @@ footer {
 }
 
 /* When screen is too small, content shuffles under search */
-@media screen and (max-width: 800px) {
+@media only screen and (max-width: 800px) {
      #content, #search {
      width: 95%;
      }
