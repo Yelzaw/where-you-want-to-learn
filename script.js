@@ -168,5 +168,6 @@ $(document).ready(function(){
           });
      }
      // END OF MAP
-     window.onload = callCountryData("canada"); // <---- default country to load, keep commented unless testing or deploying to avoid API call limit
+     // on window load, call country data of last search or default country
+     window.onload = searches[4]? callCountryData(searches[4]):callCountryData("canada"); // <---- default country to load, keep commented unless testing or deploying to avoid API call limit
 })
