@@ -14,6 +14,7 @@ $(document).ready(function(){
                     var newSearch = inputValue;
                     searches.push(newSearch);
                     window.localStorage.setItem("search", JSON.stringify(searches));
+                    location. reload();
                }) 
           } 
      }
