@@ -39,6 +39,7 @@ $(document).ready(function(){
                }
           } else {
                $("#country-name").text("Please enter valid country name.");
+               $(".error").text("Error!");
           }
      })
      function formatString(str) {
@@ -46,7 +47,6 @@ $(document).ready(function(){
             .replace(/(\B)[^ ]*/g, match => (match.toLowerCase()))
             .replace(/^[^ ]/g, match => (match.toUpperCase()));
         }
-
      //Store data
      function storeList(){          
           // if(!searches.includes(countryName)&&inputValue==countryName){
@@ -82,7 +82,7 @@ $(document).ready(function(){
      //to get country data, currency code,currency name and counter check input with country name          
           
           exchangeInfo.innerHTML=""; //to make sure there is no data from previous search
-          if (input=="canada"){
+          if (input=="Canada"){
                compareCurrency = "USD";
                compareName = "United State dollar";
           }
@@ -105,13 +105,10 @@ $(document).ready(function(){
 
                                    currencyExchange();
                                    wikipediaBlurb(input);// <-----link to wikipedia function
-                                   // <----- can place weather function link here
+                                   $("#today-weather").text("Loading....");// <----- can place weather function link here
                                    initMap();
                               })
-                         } else {
-                              $('#country-name').attr("style","font-size:20px");
-                              $('#country-name').text("Please enter correct country name. Thanks.");
-                              }      
+                         }    
                     })
                     .catch(error => console.log('error', error)); 
      }    
@@ -154,7 +151,6 @@ $(document).ready(function(){
           var wikiUrl = "https://en.wikipedia.org/w/api.php?action=query&format=json&origin=*&prop=extracts&exintro&explaintext&exsentences=5&titles="+input;
           var wikiInfo = document.querySelector('#history');
           wikiInfo.innerHTML=""; //to make sure there is no data from previous search
-
           fetch(wikiUrl)
                .then(function(response){
                     if(response.ok){
@@ -184,7 +180,7 @@ $(document).ready(function(){
      function initMap() {
      map = new google.maps.Map(document.getElementById('map'), {
           center: {lat:latitude, lng:longtitude},
-          zoom: 6
+          zoom: 8
           });
      }
      // END OF MAP
