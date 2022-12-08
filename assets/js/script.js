@@ -43,7 +43,7 @@ $(document).ready(function(){
      function formatString(str) {
           return str
             .replace(/(\B)[^ ]*/g, match => (match.toLowerCase()))
-            .replace(/^[^ ]/g, match => (match.toUpperCase()));
+            .replace(/(^\w{1})|(\s+\w{1})/g, match => (match.toUpperCase()));
         }
 
      //Store data in localstorage
