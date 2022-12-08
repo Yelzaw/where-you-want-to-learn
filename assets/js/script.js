@@ -109,7 +109,7 @@ $(document).ready(function(){
 
      // CURRENCY EXCHANGE RATE
      function currencyExchange(){          
-          var key = "9d764e23d7588b589becfa68e6021ab75a789334";
+          var key = "e850a848ce4d55bbbfb07844e6e8f9c7af75429a";
 
           const url1 =  "https://api.getgeoapi.com/v2/currency/convert?api_key="+key+"&from="+compareCurrency+"&to="+currencyCode+"&amount=1&format=json"
           fetch(url1)
