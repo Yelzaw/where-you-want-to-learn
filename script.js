@@ -8,13 +8,13 @@ $(document).ready(function(){
                const newPreviosSearch = `<button id="eachPreviousSearch${i}" class="eachPreviousSearch">${searches[i]}</button>`
                $('#previos-search').prepend(newPreviosSearch);
                $(`#eachPreviousSearch${i}`).on('click', function() {
-                    $('#previos-search').prepend(newPreviosSearch);
-                    inputValue = searches[i]
-                    callCountryData(inputValue)
-                    var newSearch = inputValue;
-                    searches.push(newSearch);
-                    window.localStorage.setItem("search", JSON.stringify(searches));
-                    location. reload();
+                    // $('#previos-search').prepend(newPreviosSearch);
+                    // inputValue = searches[i]
+                    callCountryData(searches[i])
+                    // var newSearch = inputValue;
+                    // searches.push(newSearch);
+                    // window.localStorage.setItem("search", JSON.stringify(searches));
+                    // location. reload();
                }) 
           } 
      }
