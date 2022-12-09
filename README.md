@@ -5,7 +5,7 @@
 
 <img src="/assets/images/screenshot.png" width="350" alt="Screenshot of webpage">
 
-Live [link](https://valeriikryshtal.github.io/where-you-want-to-learn/)
+Live [link](https://yelzaw.github.io/where-you-want-to-learn/)
 
 <!--Change link after changing name-->
 
